@@ -17,6 +17,19 @@ best <- function(state, outcome) {
 ## Return hospital name in that state with lowest 30-day death
 ## rate
 
+
+# actually, as usual, that prototype provided is incorrect
+# what is the point of loading an entire dataset into memory
+# if the arguments are invalid?
+#
+# it SHOULD be:
+#
+# check the state and outcome are valid else STOP
+# read outcome data
+# calculate
+# return
+
+
 outcomes <- c("heart attack", "heart failure", "pneumonia")
 
 if (! outcome %in% outcomes) {
