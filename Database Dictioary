@@ -1,0 +1,24 @@
+11. Hospital 30-Day Death (Mortality) Rates from Heart Attack: Lists the risk adjusted rate
+(percentage) for each hospital.
+
+15. Number of Patients - Hospital 30-Day Death (Mortality) Rates from Heart Attack:
+varchar (5) Lists the number of Medicare patients treated for Heart Attack by the
+Hospital.
+
+17. Hospital 30-Day Death (Mortality) Rates from Heart Failure: Lists the risk adjusted rate
+(percentage) for each hospital.
+
+21. Number of Patients - Hospital 30-Day Death (Mortality) Rates from Heart Failure:
+varchar (5) Lists the number of Medicare patients treated for Heart Failure by the
+Hospital.
+
+23. Hospital 30-Day Death (Mortality) Rates from Pneumonia: Lists the risk adjusted rate
+(percentage) for each hospital.
+
+27. Number of Patients - Hospital 30-Day Death (Mortality) Rates from Pneumonia:
+varchar (5) Lists the number of Medicare patients treated for Pneumonia by the
+Hospital.
+
+
+
+
