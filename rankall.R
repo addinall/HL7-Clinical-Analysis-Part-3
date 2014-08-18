@@ -40,21 +40,7 @@ rankall <- function(outcome, num = "best") {
 ## Return a data frame with the hospital names and the
 ## (abbreviated) state name
 
-
-if (num == "best") {            ## mixing argument types, tsk!
-    num <- "1"                  ## who writes these specs?
-} else if (num == "worst") {    ## at the end of the program
-        num <- "-1"             ## if we find that the rank
-}                               ## requested is LESS than 0,
-                                ## then we want the LAST record
-                                ## in the set to be returned
-
-suppressWarnings(num <- as.numeric(num))
-
-if (is.na(num)) {               ## this shouldn't happen,
-    return(num)                 ## BUT, with a very loosely
-}                               ## type language, num COULD be "BUM"
-
+i_num <- num
 
 outcomes <- c("heart attack", "heart failure", "pneumonia")
 
@@ -62,14 +48,22 @@ if (! outcome %in% outcomes) {
     stop("invalid outcome")
 }
 
+
+## build an empty data frame as we don't know
+## how many records will be required so pre-allocating
+## space is problamatical
+
+rank_all  <- data.frame(  hospital = character(), 
+                          state = character(), 
+                          stringsAsFactors = FALSE)
+
+## start the processing
+
 outcome_data <- read.csv('data/outcome-of-care-measures.csv', 
                                 stringsAsFactors = FALSE)
 
 states <- unique(outcome_data[, "State"])
 
-if (! state %in% states) {
-    stop("invalid state")
-}
 
 ## I am just getting rid of a big ugly column name here.
 ## way too much typing and prone to error
@@ -81,49 +75,20 @@ if (outcome == "heart attack") {
 } else {
     deaths <-"Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia"}
 
-## sort on two column to resolve ties in scores for first place
+for (state_index in states) {
 
-sortnames       <- c(deaths, "Hospital.Name")
+   rank_entry <- rankhospital(state_index, outcome, i_num)
+        
+   if (!is.null(rank_entry)) {
+        rank_all <- rbind(rank_all, 
+                              data.frame( hospital = rank_entry, 
+                                          state = state_index,
+                                          stringsAsFactors = FALSE))
+    }
+ }
 
-## trim the dataset down from 46 column to 4 that we need
-
-outcome_data    <- outcome_data[, c("Provider.Number", "Hospital.Name", "State", deaths)]
-
-## and dump all but the state we are interested in
-
-outcome_data    <- subset(outcome_data, outcome_data[, 3] == state)
-
-number_hospitals <- nrow(outcome_data)
-
-## go awy if a silly ROOLY big number record
-## is requested
-
-if (number_hospitals < num) {
-    return(NA)
-}
-
-
-## we know, we WANT to force the NA converstions
-
-suppressWarnings(outcome_data[,4] <- as.numeric(outcome_data[, 4]))
-
-## dump the NAs
-## this came about because the people that put the database
-## together mixed numbers with "Too tichy" so R turns the
-## whole database into characters.  We need to turn some
-## of them back into numbers for the sort.
-
-outcome_data    <- na.omit(outcome_data)
-
-## sort by rank then name
-
-outcome_data <- outcome_data[do.call("order", outcome_data[sortnames]),]
-
-if (num == -1) {                ## worst rank
-    num <- nrow(outcome_data)
-}
-
-print(outcome_data[num, 2])
+rank_all <- rank_all[order(rank_all$state), ]
+return(rank_all)
 
 }
 

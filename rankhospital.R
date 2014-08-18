@@ -84,7 +84,7 @@ if (! state %in% states) {
 
 if (outcome == "heart attack") {
     deaths <- "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack" 
-} else if (outcome == "heart_failure") {
+} else if (outcome == "heart failure") {
     deaths <- "Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure"
 } else {
     deaths <-"Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia"}
