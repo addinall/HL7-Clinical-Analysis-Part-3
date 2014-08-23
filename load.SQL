@@ -1,0 +1,7 @@
+LOAD DATA INFILE '/tmp/care' 
+	INTO TABLE hospital_outcomes 
+		FIELDS TERMINATED BY ',' 
+		CLOSED BY '"' 
+		LINES TERMINATED BY '\n' 
+			IGNORE 1 ROWS;
+
