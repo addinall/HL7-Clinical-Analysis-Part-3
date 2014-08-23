@@ -14,9 +14,9 @@ delimiter //
 
 drop procedure if exists `Best`//
 
-create procedure Best( 	IN  p_state 	VARCHAR(255), 
-			            IN  p_illness 	VARCHAR(255),
-			            OUT p_name 	    VARCHAR(255))
+create procedure Best(  IN  p_state     VARCHAR(255), 
+                        IN  p_illness   VARCHAR(255),
+                        OUT p_name      VARCHAR(255))
 begin
 
     set @local_name = NULL;   -- firstly we need this as it seems mySQL
@@ -31,13 +31,13 @@ begin
                               -- EEEK!
 
     set @p_query = concat("select Hospital_Name into @local_name",  
-    	" from hospital_outcomes where ", p_illness, " > 0 and State = '", p_state, 
-    		"' order by ", p_illness, ", Hospital_Name ",   
-    		"Limit 1;");
+        " from hospital_outcomes where ", p_illness, " > 0 and State = '", p_state, 
+            "' order by ", p_illness, ", Hospital_Name ",   
+            "Limit 1;");
 
-	prepare best_query
-	    from @p_query;
-	
+    prepare best_query
+        from @p_query;
+    
     execute best_query;
 
     if isnull(@local_name) then
