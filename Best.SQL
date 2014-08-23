@@ -6,7 +6,7 @@ delimiter //
 -- Best.SQL
 -- Reads a table constructed froma CSV HL7 file
 -- and finds the hospital with the BEST OUTCOMES
--- by state - ilness
+-- by state - illness
 --
 -- Mark Addinall - 2014
 --
