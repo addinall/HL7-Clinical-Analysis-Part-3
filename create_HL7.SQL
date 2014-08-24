@@ -64,5 +64,5 @@ create table states (State VARCHAR(10));
 
 create table maladies (illness VARCHAR(255), long_name VARCHAR(255));
 
-create table WIES_separations (WIES_code VARCHAR(64(, WIES_description VARCHAR(255), rate FLOAT);
+create table WIES_separations (WIES_code VARCHAR(64), WIES_description VARCHAR(255), rate FLOAT);
 
