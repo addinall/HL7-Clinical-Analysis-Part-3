@@ -1,3 +1,13 @@
+-- create_HL7.SQL
+-- Mark Addinall
+-- August 2014
+--
+-- Create the HL7 v2.5 database for these routines.
+-- the captured data will be used to perform various
+-- statistical reporting on the ranking of hospitals
+-- and outcomes
+
+
 CREATE TABLE hospital_outcomes (
 			Provider_Number VARCHAR(255)  NOT NULL,
 			Hospital_Name VARCHAR(255)  NOT NULL,
@@ -48,4 +58,11 @@ CREATE TABLE hospital_outcomes (
 			id INT AUTO_INCREMENT NOT NULL,
 		PRIMARY KEY(id)
 	);
-			
+		
+
+create table states (State VARCHAR(10));
+
+create table maladies (illness VARCHAR(255), long_name VARCHAR(255));
+
+create table WIES_separations (WIES_code VARCHAR(64(, WIES_description VARCHAR(255), rate FLOAT);
+
